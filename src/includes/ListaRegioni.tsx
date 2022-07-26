@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { Col, Row } from 'react-bootstrap';
 import ListaComuni from './ListaComuni';
 import ListaProvince from './ListaProvince';
 
@@ -26,20 +27,25 @@ const ListaRegioni = () => {
     return data;
   };
 
-  var i: number =0;
+  var i: number = 0;
 
 
   return (
     <div>
-      { regioni.map((nome: string) => {
+      {regioni.map((nome: string) => {
         return (
-          <div key={nome} >
-            <h1>
-              {nome} [regione]
-            </h1>
-            <ListaProvince  nomeRegione={nome} />
+          <Row key={nome}>
+            <Col md={{ span: 6, offset: 3 }}>
+              <div  >
+                <h1>
+                  {nome} [regione]
+                </h1>
+                <ListaProvince nomeRegione={nome} />
 
-          </div>
+              </div>
+            </Col>
+          </Row>
+
         );
       })}
     </div>

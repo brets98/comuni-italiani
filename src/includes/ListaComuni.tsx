@@ -25,7 +25,7 @@ const ListaComuni = ({ nomeProvincia }: { nomeProvincia: string }) => {
         <div>
             {comuni.map(({ nome, coordinate }: { nome: string, coordinate: any }) => {
                 return (<div key={nome}>
-                    - - {nome} [ {coordinate.lat} , {coordinate.lng} ]
+                    - - {nome}
                 </div>);
             })}
         </div>
