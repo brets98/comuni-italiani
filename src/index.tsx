@@ -7,7 +7,7 @@ import {
   Route,
 } from "react-router-dom";
 import ListaRegioni from './includes/ListaRegioni';
-import Mappa from './includes/Mappa';
+import Mappa from './mappa/Mappa';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
