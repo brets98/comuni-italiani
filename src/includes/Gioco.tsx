@@ -3,6 +3,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import Test from './Test';
 import Risultato from './Risultato';
 import $ from 'jquery';
+import Datalistregioni from './Datalistregioni';
 
 const Gioco = () => {
 
@@ -10,8 +11,7 @@ const Gioco = () => {
     const [comuni, setComuni] = useState([]);
     const [rndComune, setRndComune]: any = useState();
     const [showRisultato, setShowRisultato] = useState(false);
-    const [regioni, setRegioni] = useState([]);
-    const [isCorrect, setisCorrect] = useState(false);
+    const [isCorrect, setisCorrect] = useState(1);
 
 
 
@@ -20,35 +20,30 @@ const Gioco = () => {
             const comuniFromServer = await fetchProvincia();
             setComuni(comuniFromServer);
         };
-        const getRegioni = async () => {
-            const regioniServer = await fetchRegioni();
-            setRegioni(regioniServer);
-        };
 
         getProvince();
-        getRegioni();
     }, []);
 
 
     const check = () => {
         var tentativo = $("[id=risultatoRegioni]").val();
         console.log(tentativo === rndComune.regione);
-        setisCorrect(tentativo === rndComune.regione);
+        if (tentativo === rndComune.regione) {
+            setisCorrect(2);
+        }else{
+            setisCorrect(3);
+        }
     }
     const fetchProvincia = async () => {
         const res = await fetch("https://comuni-ita.herokuapp.com/api/province/");
         const data = await res.json();
         return data;
     };
-    const fetchRegioni = async () => {
-        const res = await fetch("https://comuni-ita.herokuapp.com/api/regioni/");
-        const data = await res.json();
-        return data;
-    };
+
 
 
     const getDaIndovinare = () => {
-        setisCorrect(false);
+        setisCorrect(1);
         $("[id=risultatoRegioni]").val('');
         setShowRisultato(false);
         var num = (Math.floor(Math.random() * comuni.length))
@@ -67,14 +62,8 @@ const Gioco = () => {
             </Row>
             <Row>
                 <Col sm={{ offset: 1 }}><div>{rndComune && <input value={rndComune.nome}></input>}</div></Col>
-                <Col sm={{ offset: 1 }}><div><input id="risultatoRegioni" list="regioni" />
-                    <datalist id="regioni">
-                        {regioni.map((regione: string) => {
-                            return (
-                                <option value={regione} />
-                            )
-                        })}
-                    </datalist>
+                <Col sm={{ offset: 1 }}><div><Datalistregioni />
+
 
 
                 </div></Col>
@@ -82,7 +71,7 @@ const Gioco = () => {
             </Row>
 
 
-            <h1> {isCorrect ? "Corretto" : "Sbagliato"} </h1>
+            <h1> {isCorrect === 1 ? "Aspetto la risposta . . . " : isCorrect === 2 ? "Corretto" : "Sbagliato"} </h1>
 
 
         </div>

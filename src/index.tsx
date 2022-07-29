@@ -22,9 +22,9 @@ root.render(
     <Header />
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="comuniLista" element={<ListaRegioni />} />
-      <Route path="mappa" element={<Mappa />} />
-      <Route path="gioco" element={<Gioco/>} /> 
+      <Route path="/comuniLista" element={<ListaRegioni />} />
+      <Route path="/mappa" element={<Mappa id='main' lat={50} lng={0}/>} />
+      <Route path="/gioco" element={<Gioco/>} /> 
     </Routes>
   </BrowserRouter>
 );
