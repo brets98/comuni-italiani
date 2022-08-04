@@ -8,16 +8,16 @@ const ListaProvince = ({ nomeRegione }: { nomeRegione: string }) => {
 
 
     useEffect(() => {
-        const getComuni = async (regione: string) => {
-            const provinciaFromServer = await fetchProvincieRegione(regione);
+        const getProvince = async (regione: string) => {
+            const provinciaFromServer = await fetchProvinceRegione(regione);
 
             setProvince(provinciaFromServer);
         };
 
-        getComuni(regione);
+        getProvince(regione);
     }, []);
 
-    const fetchProvincieRegione = async (regione: string) => {
+    const fetchProvinceRegione = async (regione: string) => {
         const res = await fetch("https://comuni-ita.herokuapp.com/api/province/" + regione);
         const data = await res.json();
         return data;

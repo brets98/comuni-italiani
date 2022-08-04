@@ -23,7 +23,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/comuniLista" element={<ListaRegioni />} />
-      <Route path="/mappa" element={<Mappa id='main' lat={50} lng={0}/>} />
+      <Route path="/mappa/:coordinate" element={<Mappa />}/>
       <Route path="/gioco" element={<Gioco/>} /> 
     </Routes>
   </BrowserRouter>

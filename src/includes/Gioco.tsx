@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Row, Col } from 'react-bootstrap';
-import Test from './Test';
-import Risultato from './Risultato';
 import $ from 'jquery';
 import Datalistregioni from './Datalistregioni';
 
@@ -10,7 +8,6 @@ const Gioco = () => {
     // ! stati necessari al programma
     const [comuni, setComuni] = useState([]);
     const [rndComune, setRndComune]: any = useState();
-    const [showRisultato, setShowRisultato] = useState(false);
     const [isCorrect, setisCorrect] = useState(1);
 
 
@@ -45,7 +42,6 @@ const Gioco = () => {
     const getDaIndovinare = () => {
         setisCorrect(1);
         $("[id=risultatoRegioni]").val('');
-        setShowRisultato(false);
         var num = (Math.floor(Math.random() * comuni.length))
         var casual: any = comuni[num];
         setRndComune(casual);

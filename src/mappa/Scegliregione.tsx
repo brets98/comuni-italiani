@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Datalistregioni from '../includes/Datalistregioni'
 import { Button } from 'react-bootstrap'
 import $ from 'jquery';
-import { computeHeadingLevel } from '@testing-library/react';
-import { Marker } from 'react-leaflet';
+// import { computeHeadingLevel } from '@testing-library/react';
+// import { Marker } from 'react-leaflet';
 const Scegliregione = () => {
 
     const [comuni, setComuni] = useState([]);
