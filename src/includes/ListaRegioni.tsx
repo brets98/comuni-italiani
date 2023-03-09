@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import Mappa from '../mappa/Mappa';
 import ListaComuni from './ListaComuni';
 import ListaProvince from './ListaProvince';
+import { Link } from 'react-router-dom';
 import Mappa_module from '../mappa/Mappa_module';
 
 
@@ -11,47 +12,46 @@ import Mappa_module from '../mappa/Mappa_module';
 
 const ListaRegioni = () => {
   const [regioni, setRegioni] = useState([]);
+  const [province, setProvince] = useState([]);
+  const [comuni, setComuni] = useState([]);
+
   const [latitudine, setLatitudine] = useState(41.9);
   const [longitudine, setLongitudine] = useState(12.48);
 
   useEffect(() => {
-    const getRegioni = async () => {
-      const regioniFromServer = await fetchRegioni();
 
-      setRegioni(regioniFromServer);
+    const getComuni = async () => {
+      const comuniFromServer = await fetchComuniProvincia();
+
+      setComuni(comuniFromServer);
     };
 
-    getRegioni();
+    getComuni();
   }, []);
 
-  const fetchRegioni = async () => {
-    const res = await fetch("https://comuni-ita.herokuapp.com/api/regioni");
+
+
+
+
+
+  const fetchComuniProvincia = async () => {
+    const res = await fetch("https://comuni-ita.herokuapp.com/api/comuni/");
     const data = await res.json();
     return data;
   };
 
+  console.log(comuni);
   return (
     <Row>
       <Col className="scrollable-div">
-        {regioni.map((nome: string) => {
+        {comuni.map(({ nome, coordinate, codiceCatastale }: { nome: string, coordinate: any, codiceCatastale: string }) => {
           return (
-            <Row key={nome}>
-              <Col md={{ span: 6 }}>
-                <div>
-                  <h1>
-                    {nome} [regione]
-                  </h1>
-                  <ListaProvince nomeRegione={nome} />
-                </div>
-              </Col>
-            </Row>
-          );
+            <div key={codiceCatastale}>
+              <p>{nome}</p>
+            </div>);
         })}
       </Col>
-      <Col>
-        <Mappa_module lat={latitudine} lng={longitudine} />
 
-      </Col>
     </Row>
   )
 }
